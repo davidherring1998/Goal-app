@@ -15,7 +15,7 @@ mongoDB()
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use('/api/goals', goalRoutes);
-// app.use('/api/users', userRoutes);
+app.use('/api/users', userRoutes);
 app.use(errHandler);
 
 app.listen(PORT, (err) => {

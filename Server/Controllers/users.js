@@ -7,40 +7,45 @@ const bcrypt = require("bcryptjs");
 // POST
 // /api/users/
 const addUser = asyncHandler(async (req, res) => {
+  // DECONSTRUCT NAME, EMAIL, PASSWORD FROM THE REQ.BODY
   const { name, email, password } = req.body;
 
-  // check that all required data is present
+  //VALIDATE THAT ALL INPUTS ARE GIVIN.
   if (!name || !email || !password) {
-    res.status(400).json({ msg: `Please enter all text fields.` });
+    res.status(400).json({ msg: `Please enter all required fields.` });
   }
 
-  // check if user exist
-  const exists = await User.findOne({ email });
-  if (exists) {
-    res.status(400).json({ msg: `User already exist.` });
+  // CHECK IF USER EXIST BY CHECKING EMAIL SINCE IT IS UNIQUE IN MODEL
+  const userExist = await User.findOne({ email });
+  if (userExist) {
+    res.status(400).json({ msg: `User already exist with the email.` });
   }
 
-  // hash password
+  // HASH THE PASSWORD
+  // GENERATE SALT, DEFAULT IS 10?
   const salt = await bcrypt.genSalt(10);
+  // HASHED PASSWORD, TAKES IN PLAINTEXT PASSWORD AND THE SALT
   const hashedPassword = await bcrypt.hash(password, salt);
 
-  // create user
+  // CREATE THE USER
   const user = await User.create({
     name,
     email,
     password: hashedPassword,
-    token: generateToken(user.id),
   });
 
-  // send back 201 response
+  // CHECK IF USER WAS CREATED
   if (user) {
     res.status(201).json({
+      msg: `User was created.`,
       _id: user.id,
       name: user.name,
       email: user.email,
+      token: generateToken(user.id),
     });
   } else {
-    res.status(400).json({ msg: `Failed, User not created.` });
+    res.status(400);
+    throw new Error();
   }
 });
 
@@ -48,10 +53,15 @@ const addUser = asyncHandler(async (req, res) => {
 // POST
 // /api/users/login
 const loginUser = asyncHandler(async (req, res) => {
+  // DECONSTRUCT EMAIL,PASSWORD FROM REQ.BODY
   const { email, password } = req.body;
 
+  // CHECK FOR USER EMAIL
   const user = await User.findOne({ email });
 
+  //MATCH USER PASSWORD
+  // THE PASSWORD IN DB IS HASHED, SO USE BCRYPT.COMPARE TO HASH AND COMPARE
+  // BCRYPT TAKES TO ARGUMENTS, PLAIN TEXT PASSWORD(PASSWORD) AND THE HASHED PASSWORD(USER.PASSWORD)
   if (user && (await bcrypt.compare(password, user.password))) {
     res.json({
       _id: user.id,
@@ -60,19 +70,23 @@ const loginUser = asyncHandler(async (req, res) => {
       token: generateToken(user.id),
     });
   } else {
-    res.status(400).json({ msg: `Failed, invalid credentials ` });
+    res.status(400).json({ msg: `Please enter the correct credentials.` });
+    throw new Error();
   }
 });
-// Get user data
-// GET // private
+
+// GET user data
+//  private
 // api/users/me
+// PROTECT ROUTES MY CREATING MIDDLEWARE
 const getMe = asyncHandler(async (req, res) => {
-  const { email } = req.body;
-  const user = await User.findOne({ email });
-  res.json(user);
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+  res.json({ msg: `User data: ${user}` });
 });
 
-// generate a token
+// GENERATE TOKEN AND SET ID AS PAYLOAD
+// JWT TAKES IN THE PAYLOAD(ID), SECRET, OPTIONS: EXPIRES IN 30D
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "30d" });
 };
@@ -88,3 +102,8 @@ module.exports = {
   getMe,
   getAllUser,
 };
+
+// JSONWEBTOKEN => {
+// NEEDS A SECRET
+// CREATE FUNCTION TO GENERATE A TOKEN
+// }

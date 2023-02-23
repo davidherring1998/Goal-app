@@ -9,13 +9,17 @@ const userRoutes = require('./Routes/users');
 // initialize express
 const app = express();
 const PORT = process.env.PORT || 5001;
-mongoDB()
+mongoDB();
 
 // middleware
+// parses incoming request with json payloads
 app.use(express.json());
+// parses incoming request with urlencoded payloads
 app.use(express.urlencoded({extended: false}));
+// routes
 app.use('/api/goals', goalRoutes);
 app.use('/api/users', userRoutes);
+// err handler
 app.use(errHandler);
 
 app.listen(PORT, (err) => {

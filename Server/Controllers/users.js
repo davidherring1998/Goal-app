@@ -80,9 +80,14 @@ const loginUser = asyncHandler(async (req, res) => {
 // api/users/me
 // PROTECT ROUTES MY CREATING MIDDLEWARE
 const getMe = asyncHandler(async (req, res) => {
-    const { email } = req.body;
-    const user = await User.findOne({ email });
-  res.json({ msg: `User data: ${user}` });
+    // REQ.USER.ID IS WHO EVER'S ID THAT HAS BEEN AUTHENTICATED
+  const { _id, name, email } = await User.findById(req.user.id);
+
+  res.status(200).json({
+    id: _id,
+    name,
+    email,
+  });
 });
 
 // GENERATE TOKEN AND SET ID AS PAYLOAD

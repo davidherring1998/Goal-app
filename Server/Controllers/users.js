@@ -80,7 +80,7 @@ const loginUser = asyncHandler(async (req, res) => {
 // api/users/me
 // PROTECT ROUTES MY CREATING MIDDLEWARE
 const getMe = asyncHandler(async (req, res) => {
-    // REQ.USER.ID IS WHO EVER'S ID THAT HAS BEEN AUTHENTICATED
+  // REQ.USER.ID IS WHO EVER'S ID THAT HAS BEEN AUTHENTICATED
   const { _id, name, email } = await User.findById(req.user.id);
 
   res.status(200).json({
@@ -90,16 +90,17 @@ const getMe = asyncHandler(async (req, res) => {
   });
 });
 
+// Get all users for development
+const getAllUser = asyncHandler(async (req, res) => {
+  const user = await User.find();
+  res.status(200).json(user);
+});
+
 // GENERATE TOKEN AND SET ID AS PAYLOAD
 // JWT TAKES IN THE PAYLOAD(ID), SECRET, OPTIONS: EXPIRES IN 30D
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "30d" });
 };
-
-const getAllUser = asyncHandler(async (req, res) => {
-  const user = await User.find();
-  res.status(200).json(user);
-});
 
 module.exports = {
   addUser,

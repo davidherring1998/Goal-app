@@ -1,0 +1,20 @@
+{
+  "name": "goal-app",
+  "version": "1.0.0",
+  "description": "goal application",
+  "main": "index.js",
+  "scripts": {
+    "client": "npm start --prefix client",
+    "server": "npm run dev --prefix Server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidherring1998/Goal-app.git"
+  },
+  "author": "david herring",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidherring1998/Goal-app/issues"
+  },
+  "homepage": "https://github.com/davidherring1998/Goal-app#readme"
+}

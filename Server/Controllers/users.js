@@ -56,7 +56,7 @@ const loginUser = asyncHandler(async (req, res) => {
   // DECONSTRUCT EMAIL,PASSWORD FROM REQ.BODY
   const { email, password } = req.body;
 
-  // CHECK FOR USER EMAIL
+  // FIND USER BY EMAIL
   const user = await User.findOne({ email });
 
   //MATCH USER PASSWORD

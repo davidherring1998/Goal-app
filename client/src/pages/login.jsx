@@ -27,7 +27,7 @@ function Login() {
         <h1>
           <FaSignInAlt /> Login
         </h1>
-        <p>Please create an account</p>
+        <p>Please Login!</p>
       </section>
       <section className="form">
         <form onSubmit={onSubmit}>

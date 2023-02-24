@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "client": "npm start --prefix client",
-    "server": "npm run dev --prefix Server"
+    "server": "npm run dev --prefix Server",
+    "start": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/davidherring1998/Goal-app/issues"
   },
-  "homepage": "https://github.com/davidherring1998/Goal-app#readme"
+  "homepage": "https://github.com/davidherring1998/Goal-app#readme",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
 }

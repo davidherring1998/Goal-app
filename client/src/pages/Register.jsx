@@ -13,7 +13,9 @@ function Register() {
   const { name, email, password, password2 } = formData;
 
   const onChange = (e) => {
+    // revState overrides the current state with the last state's parameters. 
     setFormData((prevState) => ({
+      //  ... destructs the prevState's object.. { name , email , password } into separate variables. 
       ...prevState,
       [e.target.name]: e.target.value,
     }));
@@ -30,7 +32,7 @@ function Register() {
           <FaUser /> Register
         </h1>
         <p>Please create an account</p>
-      </section>
+      </section> 
       <section className="form">
         <form onSubmit={onSubmit}>
           <div className="form-group">

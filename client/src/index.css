@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
 * {
   margin: 0;
@@ -7,7 +7,7 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   height: 100vh;
 }
 
@@ -212,4 +212,19 @@ h3 {
   .heading p {
     font-size: 1.5rem;
   }
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 1.6vh;
+  margin-bottom: 20px;
+}
+
+.footer span {
+  text-align: center;
+  color: red;
+  margin-left: 30%;
+  margin-right: 50%;
 }

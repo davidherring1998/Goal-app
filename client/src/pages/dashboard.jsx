@@ -1,7 +1,25 @@
-function dashboard() {
-  return (
-    <div>dashboard</div>
-  )
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import GoalFrom from '../components/GoalForm'
+
+function Dashboard() {
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
+  return <>
+    <section className="heading">
+      <h1>Welcome {user && user.name}</h1>
+      <p>Your Goals: </p>
+    </section>
+    <GoalFrom />
+  </>;
 }
 
-export default dashboard
+export default Dashboard;

@@ -68,7 +68,7 @@ h3 {
 }
 
 .header ul li a:hover {
-  color: #777;
+  color: red;
 }
 
 .header ul li a svg {
@@ -167,6 +167,7 @@ h3 {
 
 .btn:hover {
   transform: scale(0.98);
+  background-color: red;
 }
 
 .loadingSpinnerContainer {

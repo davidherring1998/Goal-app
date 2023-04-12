@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { createGoal } from "../features/goals/goalSlice";
 
 export default function GoalForm() {
+  // setting state
   const [text, setText] = useState("");
 
+  // initializing dispatch 
   const dispatch = useDispatch();
 
   const onSubmit = (e) => {

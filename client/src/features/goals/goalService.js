@@ -15,7 +15,7 @@ const createGoal = async (goalData, token) => {
   return response.data;
 };
 
-// Get user goals
+// get user goals 
 const getGoals = async (token) => {
   const config = {
     headers: {
@@ -27,6 +27,7 @@ const getGoals = async (token) => {
 
   return response.data;
 };
+
 
 // Delete user goal
 const deleteGoal = async (goalId, token) => {

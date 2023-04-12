@@ -1,28 +1,49 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import GoalFrom from '../components/GoalForm'
+import { useSelector, useDispatch } from "react-redux";
+import GoalFrom from "../components/GoalForm";
+import Spinner from "../components/Spinner";
+import { getGoals, reset } from "../features/goals/goalSlice";
 
 function Dashboard() {
-  // initialize navigate 
+  // initialize navigate
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  // Gets current state to see if user is logged in or not. Takes in a function 
+  // Gets current state to see if user is logged in or not. Takes in a function
   const { user } = useSelector((state) => state.auth);
+  const { goals, isLoading, isError, message } = useSelector(
+    (state) => state.goal
+  );
 
   useEffect(() => {
-    // checks to see if there is a user, if not user will be redirected to login page 
+    if (isError) {
+      console.log(message);
+    }
+
     if (!user) {
       navigate("/login");
     }
-  }, [user, navigate]);
-  return <>
-    <section className="heading">
-      <h1>Welcome {user && user.name}</h1>
-      <p>Your Goals: </p>
-    </section>
-    <GoalFrom />
-  </>;
+
+    dispatch(getGoals());
+
+    return () => {
+      dispatch(reset());
+    };
+  }, [user, navigate, isError, message, dispatch]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+  return (
+    <>
+      <section className="heading">
+        <h1>Welcome {user && user.name}</h1>
+        <p>Your Goals: </p>
+      </section>
+      <GoalFrom />
+    </>
+  );
 }
 
 export default Dashboard;

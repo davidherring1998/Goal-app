@@ -71,7 +71,7 @@ const loginUser = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(400).json({ msg: `Please enter the correct credentials.` });
-    throw new Error();
+    throw new Error('Invalid credentials');
   }
 });
 

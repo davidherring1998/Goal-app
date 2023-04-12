@@ -7,6 +7,7 @@ import { register, reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
 
 function Register() {
+  // Create form statek
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -37,7 +38,7 @@ function Register() {
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
-    // revState overrides the current state with the last state's parameters.
+    // prevState overrides the current state with the last state's parameters.
     setFormData((prevState) => ({
       //  ... destructs the prevState's object.. { name , email , password } into separate variables.
       ...prevState,
@@ -94,7 +95,7 @@ function Register() {
               onChange={onChange}
             />
             <input
-              type="text"
+              type="password"
               className="form-control"
               id="password"
               name="password"
@@ -103,7 +104,7 @@ function Register() {
               onChange={onChange}
             />
             <input
-              type="text"
+              type="password"
               className="form-control"
               id="password2"
               name="password2"

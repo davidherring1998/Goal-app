@@ -12,7 +12,7 @@ const goalSchema = mongoose.Schema(
       required: true,
     },
   },
-  { timestamp: true }
+  { timestamps: true }
 );
 
 const Goal = mongoose.model("Goal", goalSchema);

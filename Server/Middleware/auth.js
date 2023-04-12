@@ -2,9 +2,11 @@ const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
 const User = require("../Models/User");
 
+// this is creating authentication middleware
 const protect = asyncHandler(async (req, res, next) => {
   let token;
 
+  // authorization header is spelled: `Bearer tokenHere`
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
@@ -12,6 +14,7 @@ const protect = asyncHandler(async (req, res, next) => {
     try {
       // GETTING TOKEN FROM HEADER
       // REMEMBER BEARER TOKEN HERE
+      // split turns auth header into an array and gets the [1] index which is the token
       token = req.headers.authorization.split(" ")[1];
       //  VERIFY TOKEN
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -23,12 +26,12 @@ const protect = asyncHandler(async (req, res, next) => {
       next();
     } catch (err) {
       console.log(err);
-      res.status(401);
+      res.status(401); //not authorized status code
       throw new Error(`Not Authorized.`);
     }
   }
   if (!token) {
-    res.status(401);
+    res.status(401); //not authorized status code
     throw new Error(`Not Authorized, no token present.`);
   }
 });

@@ -16,11 +16,12 @@ mongoDB();
 app.use(express.json());
 // parses incoming request with urlencoded payloads
 app.use(express.urlencoded({extended: false}));
+// err handler
+app.use(errHandler);
 // routes
 app.use('/api/goals', goalRoutes);
 app.use('/api/users', userRoutes);
-// err handler
-app.use(errHandler);
+
 
 app.listen(PORT, (err) => {
     if(!err){

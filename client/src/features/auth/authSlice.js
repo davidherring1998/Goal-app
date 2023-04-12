@@ -1,16 +1,13 @@
-// WHere the reducers and initial states are going to go.
+// Where the reducers and initial states are going to go.
 
-import { createSlice, createAsyncThunk, isFulfilled } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
 
 //  save the user's token in local storage to access protected routes.
-
 // Get user from local storage
-// parse because local storage can only have strings..
 const user = JSON.parse(localStorage.getItem("user"));
 
 const initialState = {
-  // checking is user is in local, if so use it, else set to null
   user: user ? user : null,
   isError: false,
   isSuccess: false,
@@ -20,7 +17,7 @@ const initialState = {
 
 // register user
 export const register = createAsyncThunk(
-  "auth/register",
+  "auth/register", //string of the action
   async (user, thunkAPI) => {
     try {
       return await authService.register(user);
@@ -57,6 +54,7 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    // This resets values back to their original state
     reset: (state) => {
       state.isError = false;
       state.isSuccess = false;
@@ -65,6 +63,7 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    //these are async
     builder
       .addCase(register.pending, (state) => {
         state.isLoading = true;
@@ -76,10 +75,8 @@ export const authSlice = createSlice({
       })
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
-        state.user = action.payload;
-      })
-      .addCase(logout.fulfilled, (state) => {
+        state.isError = true;
+        state.message = action.payload;
         state.user = null;
       })
       .addCase(login.pending, (state) => {
@@ -92,11 +89,16 @@ export const authSlice = createSlice({
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
-        state.user = action.payload;
+        state.isError = true;
+        state.message = action.payload;
+        state.user = null;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.user = null;
       });
   },
 });
 
+//
 export const { reset } = authSlice.actions;
 export default authSlice.reducer;

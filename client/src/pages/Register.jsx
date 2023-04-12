@@ -7,7 +7,7 @@ import { register, reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
 
 function Register() {
-  // Create form statek
+  // Create form state
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -18,6 +18,7 @@ function Register() {
   //   destructor fields
   const { name, email, password, password2 } = formData;
 
+  // initialize 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

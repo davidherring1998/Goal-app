@@ -47,18 +47,17 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
 });
 
 export const logout = createAsyncThunk("auth/logout", async () => {
-  await authService.logout();
+  return await authService.logout();
 });
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    // This resets values back to their original state
     reset: (state) => {
-      state.isError = false;
-      state.isSuccess = false;
       state.isLoading = false;
+      state.isSuccess = false;
+      state.isError = false;
       state.message = "";
     },
   },

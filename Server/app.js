@@ -22,16 +22,17 @@ app.use(errHandler);
 // routes
 app.use("/api/goals", goalRoutes);
 app.use("/api/users", userRoutes);
-// Serve the client
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/build")));
-  app.get("*", (req, res) =>
+// Serve client
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/build')));
+
+  app.get('*', (req, res) =>
     res.sendFile(
-      path.resolve(__dirname, "../", "client", "build", "index.html")
+      path.resolve(__dirname, '../', 'client', 'build', 'index.html')
     )
   );
 } else {
-  app.get("/", (req, res) => res.send("Please set to production mode."));
+  app.get('/', (req, res) => res.send('Please set to production'));
 }
 
 app.listen(PORT, (err) => {

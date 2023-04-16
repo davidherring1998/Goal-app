@@ -18,6 +18,7 @@
 
 Deployment: https://davidherringgoalapp.herokuapp.com/
 
+Walk through video:  https://drive.google.com/file/d/1mSs8tlqBZSWDkXKaIKNHpTRP1lA5tnT3/view
 
 Repo: https://github.com/davidherring1998/Goal-app
 

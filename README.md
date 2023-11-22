@@ -1,28 +1,26 @@
 # Goal-app
 
 ## Description
-  This is a simple MERN application that a user can register a account, login, and create time-stamped goals.
+This is a MERN (MongoDB, Express, React, Node) application that allows users to register an account, log in, and create time-stamped goals. 
 
 ## Usage
-  The user is first prompted to login, if the user has not created a account they have the option to register as a new user. When the user logs in they are directed to the dashboard with the option to create a new goal. When the user creates a new goal it is displayed under the goal input. When the user completes there goal, they can click the trash can in the top right of their goal and the goal will be deleted. 
-  
-## Technology Used
-* MongoDB/Epress/React/Node
-* Redux
-* Dotenv
-* Mongoose
-* Colors
+- **Account Registration and Login**: Users are first prompted to log in. If they do not have an account, they can register as a new user.
+- **Dashboard and Goal Creation**: After logging in, users are directed to the dashboard where they can create new goals.
+- **Goal Management**: Created goals are displayed under the goal input section. Users can delete a goal by clicking the trash can icon on the top right of their goal, indicating the completion of the goal.
 
+## Technology Used
+- MongoDB/Express/React/Node (MERN Stack)
+- Redux for state management.
+- Dotenv for environment variable management.
+- Mongoose for data modeling.
+- Colors for styling enhancements.
 
 ## Links
+- **Deployment**: [Goal-app Live](https://davidherringgoalapp.herokuapp.com/)
+- **Walkthrough Video**: [App Walkthrough](https://drive.google.com/file/d/1mSs8tlqBZSWDkXKaIKNHpTRP1lA5tnT3/view)
+- **GitHub Repository**: [GitHub Repo](https://github.com/davidherring1998/Goal-app)
 
-Deployment: https://davidherringgoalapp.herokuapp.com/
 
-Walk through video:  https://drive.google.com/file/d/1mSs8tlqBZSWDkXKaIKNHpTRP1lA5tnT3/view
-
-Repo: https://github.com/davidherring1998/Goal-app
-
-## Screenshots:
 
 <img width="1512" alt="Screenshot 2023-04-13 at 6 32 28 PM" src="https://user-images.githubusercontent.com/106282330/231904915-ff707bb1-e024-4edb-9e9f-bbebfa645810.png">
 <img width="1512" alt="Screenshot 2023-04-13 at 6 32 36 PM" src="https://user-images.githubusercontent.com/106282330/231904918-5a992e9a-d955-47aa-a98f-3a3cdd300175.png">
